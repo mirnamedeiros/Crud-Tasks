@@ -1,0 +1,41 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+    <ui:composition template="/templates/template.xhtml">
+        <ui:define name="tittle">Task List</ui:define>
+        <ui:define name="content">
+            <h:form>
+                <p:messages/>
+                <p:growl/>
+                <p:commandButton value="New" action="#{taskController.newTask()}"
+                                 ajax="false" icon="ui-icon-plus"/>
+                <p:dataTable value="#{taskController.dao.list}" var="obj">
+                    <p:column headerText="ID">
+                        <p:outputLabel value="#{obj.id}"/>
+                    </p:column>
+                    <p:column headerText="Tittle">
+                        <p:outputLabel value="#{obj.tittle}"/>
+                    </p:column>
+                    <p:column headerText="Responsible">
+                        <p:outputLabel value="#{obj.responsible}"/>
+                    </p:column>
+                    <p:column headerText="Actions">
+                        <div align="center">
+                            <p:commandButton action="#{taskController.edit(obj.id)}"
+                                             ajax="false" icon="ui-icon-pencil"
+                                             title="Edit"/>
+                            <p:commandButton action="#{taskController.remove(obj.id)}"
+                                             icon="ui-icon-trash" title="Delete"
+                                             update="@form"
+                                             onclick="if (!confirm('Delete task ?')) return false"/>
+                        </div>
+                    </p:column>
+                </p:dataTable>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+</html>
+
