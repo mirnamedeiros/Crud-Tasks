@@ -46,20 +46,23 @@
                         <p:inputText value="#{taskController.task.responsible}" 
                                      id="txtResp"
                                      size="50" 
-                                     maxlength="50"/>
+                                     maxlength="50"
+                                     placeholder="Required"/>
                         <p:outputLabel value="Priority" for="txtPrio"/>
                         <p:inputText value="#{taskController.task.priority}" 
                                      id="txtPrio"
                                      size="10" 
-                                     maxlength="10"/>
+                                     maxlength="10"
+                                     placeholder="Required"/>
                         <p:outputLabel value="Finished"/>
                         <p:inputText value="#{taskController.task.finished}" 
-                                     size="10"
-                                     readonly="true"/>
+                                     size="10"/>
                         <p:outputLabel value="Deadline"/>
                         <p:inputText value="#{taskController.task.deadline}" 
-                                     size="10"
-                                     readonly="true"/>
+                                     size="10">
+                            <f:convertDateTime pattern="MM/dd/yyyy" />
+                        </p:inputText>
+                        
                     </p:panelGrid>
                 </div>
             </h:form>

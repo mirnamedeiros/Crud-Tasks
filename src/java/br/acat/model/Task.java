@@ -5,7 +5,7 @@
 package br.acat.model;
 
 import java.io.Serializable;
-import java.util.Calendar;
+import java.util.Date;
 import java.util.Objects;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -26,6 +26,8 @@ import org.hibernate.validator.constraints.Length;
  */
 @Entity
 @Table(name = "task")
+//@NamedQueries({
+//@NamedQuery(name = "Task.findAll", query = "SELECT t FROM Task t")})
 public class Task implements Serializable{
 
     @Id
@@ -61,7 +63,7 @@ public class Task implements Serializable{
     @Temporal(TemporalType.DATE)
     @NotNull(message = "Deadline cant be null")
     @Column(name = "deadline", nullable = false)
-    private Calendar deadline;
+    private Date deadline;
 
     public Task() {
     }
@@ -114,11 +116,11 @@ public class Task implements Serializable{
         this.finished = finished;
     }
 
-    public Calendar getDeadline() {
+    public Date getDeadline() {
         return deadline;
     }
 
-    public void setDeadline(Calendar deadline) {
+    public void setDeadline(Date deadline) {
         this.deadline = deadline;
     }
 
@@ -141,7 +143,7 @@ public class Task implements Serializable{
             return false;
         }
         final Task other = (Task) obj;
-        return Objects.equals(this.id, other.id);
+        return Objects.equals(this.id, other.getId());
     }
 
 }

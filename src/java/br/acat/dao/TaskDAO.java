@@ -25,7 +25,7 @@ public class TaskDAO implements Serializable {
     }
 
     public List<Task> getList() {
-        return em.createQuery("from Task order by tittle").getResultList();
+        return em.createQuery("SELECT t FROM Task t").getResultList();
     }
 
     public boolean save(Task t) {

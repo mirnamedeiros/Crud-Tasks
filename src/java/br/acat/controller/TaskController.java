@@ -31,7 +31,7 @@ public class TaskController {
     
     public String newTask() {
         task = new Task();
-        return "form?faces-redirect=true";
+        return "edit?faces-redirect=true";
     }
     
     public String save() {
@@ -41,7 +41,7 @@ public class TaskController {
         }
         else {
             Util.messageError(dao.getMessage());
-            return "form?faces-redirect=true";
+            return "edit?faces-redirect=true";
         }
     }
     
@@ -51,7 +51,7 @@ public class TaskController {
     
     public String edit(Integer id) {
         task = dao.find(id);
-        return "form?faces-redirect=true";
+        return "edit?faces-redirect=true";
     }
     
     public void remove(Integer id) {
