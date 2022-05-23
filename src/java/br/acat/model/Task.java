@@ -26,40 +26,38 @@ import org.hibernate.validator.constraints.Length;
  */
 @Entity
 @Table(name = "task")
-//@NamedQueries({
-//@NamedQuery(name = "Task.findAll", query = "SELECT t FROM Task t")})
-public class Task implements Serializable{
+public class Task implements Serializable {
 
     @Id
     @SequenceGenerator(name = "seq_task", sequenceName = "seq_task_id", allocationSize = 1)
     @GeneratedValue(generator = "seq_task", strategy = GenerationType.SEQUENCE)
     private Integer id;
-    
+
     @Length(max = 50, message = "Max length for the tittle is {max}")
     @NotBlank(message = "Tittle must be informed")
     @NotNull(message = "Tittle cant be null")
     @Column(name = "tittle", nullable = false, length = 50)
     private String tittle;
-    
+
     @Length(max = 250, message = "Max length for the description is {max}")
     @Column(name = "description", length = 250)
     private String description;
-    
+
     @Length(max = 50, message = "Max length for the responsible is {max}")
     @NotBlank(message = "Responsible must be informed")
     @NotNull(message = "Responsible cant be null")
     @Column(name = "responsible", nullable = false, length = 50)
     private String responsible;
-    
+
     @Length(max = 10, message = "Max length for the priority is {max}")
     @NotBlank(message = "Priority must be informed")
     @NotNull(message = "Priority cant be null")
     @Column(name = "priority", nullable = false, length = 10)
     private String priority;
-    
+
     @Column(name = "finished")
     private Boolean finished;
-    
+
     @Temporal(TemporalType.DATE)
     @NotNull(message = "Deadline cant be null")
     @Column(name = "deadline", nullable = false)
