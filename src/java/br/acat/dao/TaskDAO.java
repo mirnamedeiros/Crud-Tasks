@@ -14,76 +14,83 @@ import javax.persistence.EntityManager;
 /**
  *
  * @author Mirna
+ * @param <T>
  */
-public class TaskDAO implements Serializable {
-
-    private String message = "";
-    private EntityManager em;
+public class TaskDAO<T> extends GenericDAO<Task> implements Serializable {
 
     public TaskDAO() {
-        em = EntityManagerUtil.getEntityManager();
-    }
-
-    public List<Task> getList() {
-        return em.createQuery("SELECT t FROM Task t").getResultList();
-    }
-
-    public boolean save(Task t) {
-        try {
-            em.getTransaction().begin();
-            if (t.getId() == null) {
-                em.persist(t);
-            } else {
-                em.merge(t);
-            }
-            em.getTransaction().commit();
-            message = "task saved successfully";
-            return true;
-        } catch (Exception e) {
-            if (em.getTransaction().isActive() == false) {
-                em.getTransaction().begin();
-            }
-            em.getTransaction().rollback();
-            message = "Error while persisting object: " + Util.getMessageError(e);
-            return false;
-        }
-    }
-
-    public boolean remove(Task t) {
-        try {
-            em.getTransaction().begin();
-            em.remove(t);
-            em.getTransaction().commit();
-            message = "task removed successfully";
-            return true;
-        } catch (Exception e) {
-            if (em.getTransaction().isActive() == false) {
-                em.getTransaction().begin();
-            }
-            em.getTransaction().rollback();
-            message = "Error while removing object: " + Util.getMessageError(e);
-            return false;
-        }
-    }
-
-    public Task find(Integer id) {
-        return em.find(Task.class, id);
+        super();
+        persistenceClass = Task.class;
+        order = "id";
     }
     
-    public String getMessage() {
-        return message;
-    }
-
-    public void setMessage(String message) {
-        this.message = message;
-    }
-
-    public EntityManager getEm() {
-        return em;
-    }
-
-    public void setEm(EntityManager em) {
-        this.em = em;
-    }
+//    private String message = "";
+//    private EntityManager em;
+//
+//    public TaskDAO() {
+//        em = EntityManagerUtil.getEntityManager();
+//    }
+//
+//    public List<Task> getList() {
+//        return em.createQuery("SELECT t FROM Task t").getResultList();
+//    }
+//
+//    public boolean save(Task t) {
+//        try {
+//            em.getTransaction().begin();
+//            if (t.getId() == null) {
+//                em.persist(t);
+//            } else {
+//                em.merge(t);
+//            }
+//            em.getTransaction().commit();
+//            message = "task saved successfully";
+//            return true;
+//        } catch (Exception e) {
+//            if (em.getTransaction().isActive() == false) {
+//                em.getTransaction().begin();
+//            }
+//            em.getTransaction().rollback();
+//            message = "Error while persisting object: " + Util.getMessageError(e);
+//            return false;
+//        }
+//    }
+//
+//    public boolean remove(Task t) {
+//        try {
+//            em.getTransaction().begin();
+//            em.remove(t);
+//            em.getTransaction().commit();
+//            message = "task removed successfully";
+//            return true;
+//        } catch (Exception e) {
+//            if (em.getTransaction().isActive() == false) {
+//                em.getTransaction().begin();
+//            }
+//            em.getTransaction().rollback();
+//            message = "Error while removing object: " + Util.getMessageError(e);
+//            return false;
+//        }
+//    }
+//
+//    public Task find(Integer id) {
+//        return em.find(Task.class, id);
+//    }
+//    
+//    public String getMessage() {
+//        return message;
+//    }
+//
+//    public void setMessage(String message) {
+//        this.message = message;
+//    }
+//
+//    public EntityManager getEm() {
+//        return em;
+//    }
+//
+//    public void setEm(EntityManager em) {
+//        this.em = em;
+//    }
 
 }

@@ -3,7 +3,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-      xmlns:p="http://primefaces.org/ui">
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
     <ui:composition template="/templates/template.xhtml">
         <ui:define name="tittle">Task List</ui:define>
         <ui:define name="content">
@@ -12,7 +13,34 @@
                 <p:growl/>
                 <p:commandButton value="New" action="#{taskController.newTask()}"
                                  ajax="false" icon="ui-icon-plus"/>
-                <p:dataTable value="#{taskController.dao.list}" var="obj">
+                <p:panelGrid columns="11">
+                    <p:outputLabel value="Order"/>
+                    <p:selectOneMenu>
+                        <f:selectItem itemLabel="ID" itemValue="id"/>
+                        <f:selectItem itemLabel="Tittle" itemValue="tittle"/>
+                        <f:selectItem itemLabel="Responsible" itemValue="responsible"/>
+                        <f:selectItem itemLabel="Finished" itemValue="finished"/>
+                        <p:ajax update="listing"/>
+                    </p:selectOneMenu>
+                    <p:outputLabel value="Filter by: "/>
+                    <p:inputText value="#{taskController.dao.filter}" size="15"/>
+                    <p:commandButton value="Filter tasks" update="listing" icon="ui-icon-search"/>
+                    <p:outputLabel value="Max Task"/>
+                    <p:inputNumber value="#{taskController.dao.maxObjs}"
+                                   decimalPlaces="0" decimalSeparator="" thousandSeparator=""/>
+                    <p:commandButton value="Fist" actionListener="#{taskController.dao.first()}"
+                                     icon="ui-icon-seek-first" update="listing"/>
+                    <p:commandButton value="Previous" actionListener="#{taskController.dao.previous()}"
+                                     icon="ui-icon-seek-prev" update="listing"/>
+                    <p:commandButton value="Next" actionListener="#{taskController.dao.next()}"
+                                     icon="ui-icon-seek-next" update="listing"/>
+                    <p:commandButton value="Last" actionListener="#{taskController.dao.last()}"
+                                     icon="ui-icon-seek-end" update="listing"/>
+                </p:panelGrid>
+                <p:dataTable value="#{taskController.dao.listObjs}" var="obj" id="listing">
+                    <f:facet name="footer">
+                        <p:outputLabel value="#{taskController.dao.navegationMessage}"/>
+                    </f:facet>
                     <p:column headerText="ID">
                         <p:outputLabel value="#{obj.id}"/>
                     </p:column>

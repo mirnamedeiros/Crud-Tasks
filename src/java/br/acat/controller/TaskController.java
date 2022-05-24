@@ -18,11 +18,11 @@ import javax.faces.bean.SessionScoped;
 @SessionScoped
 public class TaskController {
     
-    private TaskDAO dao;
+    private TaskDAO<Task> dao;
     private Task task;
 
     public TaskController() {
-        dao = new TaskDAO();
+        dao = new TaskDAO<>();
     }
     
     public String list() {
@@ -35,7 +35,14 @@ public class TaskController {
     }
     
     public String save() {
-        if(dao.save(task)) {
+        boolean persisted = false;
+        if(task.getId() == null) {
+            persisted = dao.persist(task);
+        }
+        else {
+            persisted = dao.merge(task);
+        }
+        if(persisted) {
             Util.messageInfo(dao.getMessage());
             return "list?faces-redirect=true";
         }
