@@ -5,10 +5,10 @@
         <group>
             <file>file:/C:/Users/Mirna/Documents/Crud-Tasks/src/conf/persistence.xml</file>
             <file>file:/C:/Users/Mirna/Documents/Crud-Tasks/src/java/br/acat/controller/TaskController.java</file>
-            <file>file:/C:/Users/Mirna/Documents/Crud-Tasks/web/private/task/edit.xhtml</file>
+            <file>file:/C:/Users/Mirna/Documents/Crud-Tasks/src/java/br/acat/dao/GenericDAO.java</file>
             <file>file:/C:/Users/Mirna/Documents/Crud-Tasks/src/java/br/acat/persistence/persistence.xml</file>
-            <file>file:/C:/Users/Mirna/Documents/Crud-Tasks/src/java/br/acat/model/Task.java</file>
             <file>file:/C:/Users/Mirna/Documents/Crud-Tasks/web/private/task/list.xhtml</file>
+            <file>file:/C:/Users/Mirna/Documents/Crud-Tasks/src/java/br/acat/dao/TaskDAO.java</file>
         </group>
     </open-files>
 </project-private>

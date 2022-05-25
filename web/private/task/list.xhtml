@@ -15,7 +15,7 @@
                                  ajax="false" icon="ui-icon-plus"/>
                 <p:panelGrid columns="11">
                     <p:outputLabel value="Order"/>
-                    <p:selectOneMenu>
+                    <p:selectOneMenu value="#{taskController.dao.order}">
                         <f:selectItem itemLabel="ID" itemValue="id"/>
                         <f:selectItem itemLabel="Tittle" itemValue="tittle"/>
                         <f:selectItem itemLabel="Responsible" itemValue="responsible"/>
@@ -23,12 +23,14 @@
                         <p:ajax update="listing"/>
                     </p:selectOneMenu>
                     <p:outputLabel value="Filter by: "/>
-                    <p:inputText value="#{taskController.dao.filter}" size="15"/>
+                    <p:inputText value="#{taskController.dao.filter}" size="15">
+                        <p:ajax update="listing"/>
+                    </p:inputText>
                     <p:commandButton value="Filter tasks" update="listing" icon="ui-icon-search"/>
                     <p:outputLabel value="Max Task"/>
                     <p:inputNumber value="#{taskController.dao.maxObjs}"
                                    decimalPlaces="0" decimalSeparator="" thousandSeparator=""/>
-                    <p:commandButton value="Fist" actionListener="#{taskController.dao.first()}"
+                    <p:commandButton value="First" actionListener="#{taskController.dao.first()}"
                                      icon="ui-icon-seek-first" update="listing"/>
                     <p:commandButton value="Previous" actionListener="#{taskController.dao.previous()}"
                                      icon="ui-icon-seek-prev" update="listing"/>

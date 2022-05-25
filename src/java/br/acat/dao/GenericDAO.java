@@ -43,7 +43,7 @@ public class GenericDAO<T> {
                 catch(Exception e) {}
             }
             else {
-                where += " where t.upper(" + order + ") like '" + filter.toUpperCase() + "%' ";
+                where += " where t." + order + " like '%" + filter + "%' ";
             }
         }
         jpql += where;
@@ -89,7 +89,7 @@ public class GenericDAO<T> {
         if(to > totalObjs) {
             to = totalObjs;
         }
-        return (currentPosition + 1) + " / " +to+ " ["+ totalObjs + " tasks]"; 
+        return "["+to+" / "+ totalObjs + " tasks]"; 
     }
     
     public void rollback() {
